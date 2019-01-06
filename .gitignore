@@ -1,5 +1,5 @@
 storage/log/*
 storage/view/*
 Temp/
-vender/
+vendor/
 .idea
