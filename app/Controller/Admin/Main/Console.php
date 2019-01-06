@@ -15,13 +15,7 @@ class Console extends Admin
 {
     public function index()
     {
-        $insert = (new UserModel())->insert([
-            'account' => '13193310335' . rand(1, 100),
-            'password' => md5('123456'),
-            'name' => 'original',
-            'type' => 1,
-            'role' => 1
-        ]);
+        $insert = (new UserModel())->updateWhere('id', '<', '10', ['name' => '李四']);
 
         $this->render('hello', ['id' => $insert]);
     }

@@ -35,7 +35,7 @@ class EasySwooleEvent implements Event
         //设置控制器路径
         Di::getInstance()->set(
             SysConst::HTTP_CONTROLLER_NAMESPACE,
-            Config::getInstance()->getConf('app.controllerNameSpace')
+            config('app.controllerNameSpace')
         );
 
         //注册mysql连接池

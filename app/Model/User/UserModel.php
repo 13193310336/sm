@@ -13,11 +13,18 @@ use App\Model\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'user';
+    protected function getTable(): string
+    {
+        return 'user';
+    }
 
-    protected $bean = UserBean::class;
+    protected function getPrimary(): string
+    {
+        return 'id';
+    }
 
-    protected $primaryKey = 'id';
-
-    protected $guarded = [];
+    protected function getBean(): string
+    {
+        return UserBean::class;
+    }
 }

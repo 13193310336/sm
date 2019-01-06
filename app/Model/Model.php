@@ -10,8 +10,10 @@ namespace App\Model;
 use function App\Component\config;
 use App\Component\Pool\MysqlObject;
 use App\Component\Pool\MysqlPool;
+use Carbon\Carbon;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\Spl\SplBean;
+use PhpParser\Node\Expr\Array_;
 
 abstract class Model
 {
@@ -23,8 +25,6 @@ abstract class Model
 
     protected $bean = null;
 
-    protected $guarded = [];
-
     public function __construct(MysqlObject $object = null)
     {
         $this->object = $object;
@@ -35,20 +35,42 @@ abstract class Model
         if (!$object)
             $this->object = PoolManager::getInstance()->getPool(MysqlPool::class)->getObj(config('database.mysql.POOL_TIME_OUT'));
 
-        /**
-         * 如果没有设置过滤黑名单，将主键默认放进去
-         */
-        if (!$this->guarded)
-            array_push($this->guarded, $this->primaryKey);
+        $this->table = $this->getTable();
+        $this->primaryKey = $this->getPrimary();
+        $this->bean = $this->getBean();
     }
 
+    /**
+     * 获取表名
+     * @return string
+     */
+    abstract protected function getTable(): string;
+
+    /**
+     * 获取主键
+     * @return string
+     */
+    abstract protected function getPrimary(): string;
+
+    /**
+     * 获取Bean
+     * @return string
+     */
+    abstract protected function getBean(): string;
+
+    /**
+     * 获取链接
+     * @return MysqlObject
+     */
     public function getConnect(): MysqlObject
     {
         return $this->object;
     }
 
-    //销毁链接
-    public function gc()
+    /**
+     * 回收链接
+     */
+    protected function recoveryConnect()
     {
         PoolManager::getInstance()->getPool(MysqlPool::class)->recycleObj($this->object);
     }
@@ -58,19 +80,33 @@ abstract class Model
      * @param array $data
      * @return mixed
      */
-    public function insert(Array $data)
+    public function insert(array $data)
     {
         $bean = new $this->bean($data);
-        $bean->setCreated(date('Y-m-d H:i:s'));
-        $bean->setUpdated(date('Y-m-d H:i:s'));
+        $bean->setCreated(Carbon::now());
+        $bean->setUpdated(Carbon::now());
         $insertResult = $this->object->insert($this->table, $bean->toArray(null, SplBean::FILTER_NOT_NULL));
         return $insertResult;
     }
 
+    /**
+     * 通用更新方法
+     * @param $primary
+     * @param array $data
+     * @return mixed
+     */
+    public function update($primary, array $data)
+    {
+        $bean = new $this->bean($data);
+        $bean->setUpdated(Carbon::now());
+        return $this->object
+            ->where($this->primaryKey, $primary)
+            ->update($this->table, $bean->toArray(null, SplBean::FILTER_NOT_NULL));
+    }
 
 
     public function __destruct()
     {
-        $this->gc();
+        $this->recoveryConnect();
     }
 }
