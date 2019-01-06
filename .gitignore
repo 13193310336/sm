@@ -1,0 +1,5 @@
+storage/log/*
+storage/view/*
+Temp/
+vender/
+.idea

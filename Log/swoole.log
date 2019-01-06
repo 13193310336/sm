@@ -1,0 +1,9 @@
+[2019-01-05 20:54:08 #12238.6]	NOTICE	Server is shutdown now.
+[2019-01-05 20:54:08 ^12246.8]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12249.11]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12253.15]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 *12261.7]	WARNING	swSignalfd_onSignal (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12248.10]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12252.14]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12252.14]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.
+[2019-01-05 20:54:08 ^12249.11]	WARNING	swSignal_callback (ERROR 706): signal[1] callback is null.

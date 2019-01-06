@@ -1,0 +1,21 @@
+{
+    "name": "original/sm",
+    "authors": [
+        {
+            "name": "original",
+            "email": "1406838446@qq.com"
+        }
+    ],
+    "require": {
+        "easyswoole/easyswoole": "3.x-dev",
+        "easyswoole/swoole-ide-helper": "^1.2",
+        "duncan3dc/blade": "^4.3",
+        "easyswoole/mysqli": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": ["app/Component/functions.php"]
+    }
+}
