@@ -13,7 +13,6 @@ use App\Component\Pool\MysqlPool;
 use Carbon\Carbon;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\Spl\SplBean;
-use PhpParser\Node\Expr\Array_;
 
 abstract class Model
 {

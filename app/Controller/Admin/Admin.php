@@ -15,7 +15,7 @@ class Admin extends Controller
 {
     public function index()
     {
-        $this->response()->write('this is parent');
+        $this->render('admin.auth.login');
     }
 
     public function render($view, $params = [])

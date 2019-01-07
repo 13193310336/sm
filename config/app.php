@@ -3,7 +3,7 @@ return [
     /**
      * 应用host
      */
-    'appHost' => '127.0.0.1',
+    'appHost' => 'sm.local',
 
 
     /**
