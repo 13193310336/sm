@@ -75,6 +75,19 @@ abstract class Model
     }
 
     /**
+     * 通用获取单条数据
+     * @param bool $primary
+     * @return mixed
+     */
+    public function find($primary = false)
+    {
+        if ($primary)
+            return $this->object->where($this->primaryKey, $primary)->getOne($this->table);
+        else
+            return $this->object->getOne($this->table);
+    }
+
+    /**
      * 通用插入方法
      * @param array $data
      * @return mixed

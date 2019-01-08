@@ -10,6 +10,16 @@ namespace App\Component;
 use EasySwoole\EasySwoole\Config;
 
 /**
+ * 路由
+ * @param $uri
+ * @return string
+ */
+function url($uri)
+{
+    return 'http://' . \App\Component\config('app.appHost') . DIRECTORY_SEPARATOR . $uri;
+}
+
+/**
  * 静态文件路由
  * @param $uri
  * @return string

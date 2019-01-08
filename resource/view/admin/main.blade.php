@@ -706,8 +706,6 @@
 @endsection
 
 @push('script')
-    <!-- Bootstrap -->
-    <script src="{{ \App\Component\asset('static/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- FastClick -->
     <script src="{{ \App\Component\asset('static/vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
