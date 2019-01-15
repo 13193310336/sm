@@ -13,7 +13,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2>{{ $auth['name'] }}</h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -22,6 +22,23 @@
 
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            @foreach(\App\Component\config('menu') as $panel)
+                <div class="menu_section">
+                    <h3>{{ $panel['panelName'] }}</h3>
+                    <ul class="nav side-menu">
+                        @foreach($panel['panelMenu'] as $menu)
+                            <li><a><i class="{{ $menu['menuIcon'] }}"></i> {{ $menu['menuName'] }} <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    @foreach($menu['menuItem'] as $item)
+                                        <li><a href="{{ \App\Component\url($item['itemUri']) }}">{{ $item['itemName'] }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">

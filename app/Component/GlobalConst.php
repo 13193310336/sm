@@ -13,4 +13,6 @@ class GlobalConst
     //BLADE引擎DI常量
     const DI_BLADE = 'DI_BLADE';
 
+    //路由message字段
+    const URI_MESSAGE_FIELD = 'MESSAGE';
 }

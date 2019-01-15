@@ -1,5 +1,6 @@
 storage/log/*
 storage/view/*
+Log/*
 Temp/
 vendor/
 .idea

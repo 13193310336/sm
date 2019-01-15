@@ -12,11 +12,17 @@ use EasySwoole\EasySwoole\Config;
 /**
  * 路由
  * @param $uri
+ * @param $urlMessage
  * @return string
  */
-function url($uri)
+function url($uri, $urlMessage = false)
 {
-    return 'http://' . \App\Component\config('app.appHost') . DIRECTORY_SEPARATOR . $uri;
+    $url = 'http://' . \App\Component\config('app.appHost') . DIRECTORY_SEPARATOR . $uri;
+
+    if ($urlMessage)
+        $url .=  '?' . GlobalConst::URI_MESSAGE_FIELD . '=' . $urlMessage;
+
+    return $url;
 }
 
 /**

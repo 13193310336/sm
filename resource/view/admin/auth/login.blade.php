@@ -103,8 +103,8 @@
 
         $(function () {
            $('.submit').click(function () {
-               $.post('{{ \App\Component\url('admin/auth/auth/login') }}', {userName: userName, password: password}, function (response) {
-                   console.log(response);
+               $.post('{{ \App\Component\url('admin/auth/auth/doLogin') }}', {userName: userName, password: password}, function (response) {
+                   window.location.href = '{{ \App\Component\url('admin/main/console') }}';
                })
            });
         });

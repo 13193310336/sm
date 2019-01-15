@@ -22,4 +22,9 @@ class Code
         self::ACCESS => '权限不足',
         self::EXCEPTION => '系统异常'
     ];
+
+    public static function output($message)
+    {
+        return $message;
+    }
 }
