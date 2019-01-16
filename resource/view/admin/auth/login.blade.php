@@ -3,8 +3,6 @@
 @section('title')登录系统@endsection
 
 @push('style')
-    <!-- Bootstrap -->
-    <link href="{{ \App\Component\asset('static/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="{{ \App\Component\asset('static/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <!-- NProgress -->

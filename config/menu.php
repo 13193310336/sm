@@ -15,11 +15,11 @@ return [
                 'menuItem' => [
                     [
                         'itemName' => '节点管理',
-                        'itemUri'  => \App\Component\url('')
+                        'itemUri'  => 'admin/access/node'
                     ],
                     [
                         'itemName' => '权限管理',
-                        'itemUri'  => \App\Component\url('')
+                        'itemUri'  => ''
                     ],
                 ]
             ],
@@ -29,11 +29,11 @@ return [
                 'menuItem' => [
                     [
                         'itemName' => '分组管理',
-                        'itemUri'  => \App\Component\url('')
+                        'itemUri'  => ''
                     ],
                     [
                         'itemName' => '用户管理',
-                        'itemUri'  => \App\Component\url('')
+                        'itemUri'  => ''
                     ],
                 ]
             ]

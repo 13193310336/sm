@@ -13,22 +13,22 @@ use App\Model\Model;
 
 class RoleNodeModel extends Model
 {
-    protected function getTable(): string
+    protected function setTable()
     {
         // TODO: Implement getTable() method.
-        return 'role_node';
+        $this->table = 'role_node';
     }
 
-    protected function getPrimary(): string
+    protected function setPrimary()
     {
         // TODO: Implement getPrimary() method.
-        return'rn_id';
+        $this->primaryKey = 'rn_id';
     }
 
-    protected function getBean(): string
+    protected function setBean()
     {
         // TODO: Implement getBean() method.
-        return RoleNodeBean::class;
+        $this->bean = RoleNodeBean::class;
     }
 
     /**

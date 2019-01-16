@@ -14,6 +14,6 @@ class Console extends Admin
 {
     public function index()
     {
-        $this->render('admin.main');
+        $this->render('main');
     }
 }

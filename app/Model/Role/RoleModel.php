@@ -13,19 +13,19 @@ use App\Model\Model;
 
 class RoleModel extends Model
 {
-    protected function getTable(): string
+    protected function setTable()
     {
-        return 'role';
+        $this->table = 'role';
     }
 
-    protected function getPrimary(): string
+    protected function setPrimary()
     {
-        return 'role_id';
+        $this->primaryKey = 'role_id';
     }
 
-    protected function getBean(): string
+    protected function setBean()
     {
-        return RoleBean::class;
+        $this->bean = RoleBean::class;
     }
 
     /**

@@ -15,14 +15,14 @@ use App\Model\User\UserModel;
 
 class Auth extends Admin
 {
-
+    protected $viewPath = 'admin.auth';
     /**
      * 显示登录页面
      */
     public function login()
     {
         if (!$this->getAuthService()->isLogin())
-            $this->render('admin.auth.login');
+            $this->render('login');
         else
             $this->response()->redirect(url('admin/main/console'));
     }

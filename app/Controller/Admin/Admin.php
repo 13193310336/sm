@@ -22,6 +22,8 @@ class Admin extends Controller
 {
     private $auth;
 
+    protected $viewPath = 'admin';
+
     public function index()
     {
         $this->response()->redirect(url('admin/main/console'));
@@ -31,7 +33,12 @@ class Admin extends Controller
     public function render($view, $params = [])
     {
         $params['auth'] = $this->getAuthService()->getAuth();
-        $this->response()->write(Di::getInstance()->get(GlobalConst::DI_BLADE)->render($view, $params));
+        $this
+            ->response()
+            ->write(Di::getInstance()
+                ->get(GlobalConst::DI_BLADE)
+                ->render($this->viewPath . '.' . $view, $params)
+            );
     }
 
     //ajax信息返回
@@ -54,13 +61,17 @@ class Admin extends Controller
         //开启session
         $this->session()->start();
 
+        //存储必要数据
+        Di::getInstance()->set(GlobalConst::DI_HTTP_QUERY, $this->request()->getQueryParams());
+        Di::getInstance()->set(GlobalConst::DI_URI, $this->request()->getUri());
+
         //用户判断
         $this->auth = $authService = new AuthService(
             $this->session()->get(UserModel::SESSION_KEY),
-            $this->request()->getUri()->getPath()
+            trim($this->request()->getUri()->getPath(), '/')
             );
 
-        if ($authService->isBreakAuthPath()) {
+        if (!$authService->isBreakAuthPath()) {
 
             //没登录 先登录
             if (!$authService->isLogin()) {

@@ -15,6 +15,7 @@ class NodeBean extends SplBean
     protected $node_id;
     protected $uri;
     protected $name;
+    protected $type;
     protected $created;
     protected $updated;
 
@@ -64,6 +65,22 @@ class NodeBean extends SplBean
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**

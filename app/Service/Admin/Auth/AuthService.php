@@ -17,7 +17,8 @@ class AuthService extends AdminService
     protected $path = '';
     //无需验证的uri
     protected $exceptPath = [
-        '/admin/auth/auth/login'
+        'admin/auth/auth/login',
+        'admin/auth/auth/doLogin',
     ];
 
     public function __construct($auth, $path)

@@ -13,40 +13,73 @@ use App\Model\Model;
 
 class NodeModel extends Model
 {
-    protected function getPrimary(): string
+    const TYPE_PATH = 1;
+    const TYPE_BUTTON = 2;
+    const TYPE_COLLECTION = [
+        self::TYPE_PATH => '链接类型',
+        self::TYPE_BUTTON => '按钮类型'
+    ];
+
+    protected function setPrimary()
     {
         // TODO: Implement getPrimary() method.
-        return 'node_id';
+        $this->primaryKey = 'node_id';
     }
 
-    protected function getTable(): string
+    protected function setTable()
     {
         // TODO: Implement getTable() method.
-        return 'node';
+        $this->table = 'node';
     }
 
-    protected function getBean(): string
+    protected function setBean()
     {
         // TODO: Implement getBean() method.
-        return NodeBean::class;
+        $this->bean = NodeBean::class;
+    }
+
+    /**
+     * 获取列表
+     * @param $name
+     * @param $path
+     * @param $type
+     * @return array
+     */
+    public function getNodeList($name, $path, $type)
+    {
+        $query = $this->getConnect();
+
+        if ($name)
+            $query->where('name', '%' . $name . '%', 'like');
+
+        if ($path)
+            $query->where('path', '%' . $path . '%', 'like');
+
+        if ($type)
+            $query->where('type', $type);
+
+        return $this->page($query);
+
     }
 
     /**
      * 创建一个节点并返回
      * @param $uri
      * @param $name
-     * @return mixed
+     * @param int $type
+     * @return \EasySwoole\Mysqli\Mysqli|mixed|null
      */
-    public function createNode($uri, $name)
+    public function createNode($uri, $name, $type = self::TYPE_PATH)
     {
         $node = $this
             ->getConnect()
             ->where('uri', $uri)
-            ->getOne($this->table);
+            ->getOne($this->getTable());
         if (!$node) {
             $createdPrimary = $this->insert([
                 'uri' => $uri,
-                'name' => $name
+                'name' => $name,
+                'type' => $type
             ]);
             if ($createdPrimary)
                 $node = $this->find($createdPrimary);

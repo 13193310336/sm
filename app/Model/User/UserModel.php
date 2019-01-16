@@ -23,19 +23,19 @@ class UserModel extends Model
         self::TYPE_ADMIN => '后台用户'
     ];
 
-    protected function getTable(): string
+    protected function setTable()
     {
-        return 'user';
+        $this->table = 'user';
     }
 
-    protected function getPrimary(): string
+    protected function setPrimary()
     {
-        return 'id';
+        $this->primaryKey = 'id';
     }
 
-    protected function getBean(): string
+    protected function setBean()
     {
-        return UserBean::class;
+        $this->bean = UserBean::class;
     }
 
     /**
