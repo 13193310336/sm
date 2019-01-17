@@ -63,6 +63,11 @@ class EasySwooleEvent implements Event
 
     public static function afterRequest(Request $request, Response $response): void
     {
+        //存储必要数据
+        Di::getInstance()->set(GlobalConst::DI_HTTP_REQUEST, $request);
+        Di::getInstance()->set(GlobalConst::DI_HTTP_QUERY, $request->getQueryParams());
+        Di::getInstance()->set(GlobalConst::DI_URI, $request->getUri());
+
         // TODO: Implement afterAction() method.
     }
 

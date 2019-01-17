@@ -61,10 +61,6 @@ class Admin extends Controller
         //开启session
         $this->session()->start();
 
-        //存储必要数据
-        Di::getInstance()->set(GlobalConst::DI_HTTP_QUERY, $this->request()->getQueryParams());
-        Di::getInstance()->set(GlobalConst::DI_URI, $this->request()->getUri());
-
         //用户判断
         $this->auth = $authService = new AuthService(
             $this->session()->get(UserModel::SESSION_KEY),
