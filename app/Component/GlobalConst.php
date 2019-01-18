@@ -13,15 +13,17 @@ class GlobalConst
     //BLADE引擎DI常量
     const DI_BLADE = 'DI_BLADE';
 
-    //httpRequest DI常亮
-    const DI_HTTP_REQUEST = 'DI_HTTP_REQUEST';
+    //httpRequest Content常亮
+    const CONTENT_HTTP_REQUEST = 'DI_HTTP_REQUEST';
 
-    //get参数DI常量
-    const DI_HTTP_QUERY = 'DI_HTTP_QUERY';
+    //get参数CONTENT常量
+    const CONTENT_HTTP_QUERY = 'DI_HTTP_QUERY';
 
-    //uriDi常量
-    const DI_URI = 'DI_URI';
+    //uri参数CONTENT常量
+    const CONTENT_URI = 'DI_URI';
 
     //路由message字段
     const URI_MESSAGE_FIELD = 'MESSAGE';
+
+
 }

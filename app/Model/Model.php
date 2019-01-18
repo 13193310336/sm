@@ -13,6 +13,7 @@ use App\Component\Pool\MysqlObject;
 use App\Component\Pool\MysqlPool;
 use function App\Component\url;
 use Carbon\Carbon;
+use EasySwoole\Component\Context;
 use EasySwoole\Component\Di;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\Spl\SplBean;
@@ -69,17 +70,18 @@ abstract class Model
      * @param $data
      * @return SplBean
      */
-    protected function getBean($data): SplBean
+    public function getBean($data): SplBean
     {
         return new $this->bean($data);
     }
 
-    protected function getTable(): string
+
+    public function getTable(): string
     {
         return $this->table;
     }
 
-    protected function getPrimary(): String
+    public function getPrimary(): String
     {
         return $this->primaryKey;
     }
@@ -101,7 +103,6 @@ abstract class Model
         PoolManager::getInstance()->getPool(MysqlPool::class)->recycleObj($this->object);
     }
 
-
     /**
      * 通用分页
      * @param MysqlObject $query
@@ -112,11 +113,8 @@ abstract class Model
     public function page(MysqlObject $query, string $select = '*', int $pageSize = 15)
     {
         $page = 1;
-
-        $httpQuery = Di::getInstance()->get(GlobalConst::DI_HTTP_QUERY);
-
+        $httpQuery = Context::getInstance()->get(GlobalConst::CONTENT_HTTP_QUERY);
         !isset($httpQuery['page']) ?:  $page = $httpQuery['page'];
-
         //总数
         $total = $query->count($this->getTable());
         //总页数
@@ -131,22 +129,13 @@ abstract class Model
         $endRows = $startRows + $pageSize;
         //数据
         $data = $query->get($this->getTable(), [$startRows, $pageSize], $select);
-
-        $url = url(trim(Di::getInstance()->get(GlobalConst::DI_URI)->getPath(), '/'));
-
+        $url = url(trim(Context::getInstance()->get(GlobalConst::CONTENT_URI)->getPath(), '/'));
         $httpQuery['page'] = $page;
-
         $currentUrl = $url . '?' . http_build_query($httpQuery);
-
         $httpQuery['page'] = $prevPage;
-
         $prevUrl = $url . '?' . http_build_query($httpQuery);
-
         $httpQuery['page'] = $nextPage;
-
         $nextUrl = $url . '?' . http_build_query($httpQuery);
-
-
         return [
             'data' => $data,
             'page' => [
@@ -207,7 +196,6 @@ abstract class Model
             ->where($this->getPrimary(), $primary)
             ->update($this->getTable(), $bean->toArray(null, SplBean::FILTER_NOT_NULL));
     }
-
 
     public function __destruct()
     {

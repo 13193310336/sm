@@ -14,6 +14,7 @@ use App\Component\EasySwooleEventHelper;
 use App\Component\GlobalConst;
 use App\Component\Pool\MysqlPool;
 use duncan3dc\Laravel\BladeInstance;
+use EasySwoole\Component\Context;
 use EasySwoole\Component\Di;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
@@ -58,16 +59,16 @@ class EasySwooleEvent implements Event
     public static function onRequest(Request $request, Response $response): bool
     {
         // TODO: Implement onRequest() method.
+        //存储必要数据
+        Context::getInstance()->set(GlobalConst::CONTENT_HTTP_REQUEST, $request);
+        Context::getInstance()->set(GlobalConst::CONTENT_HTTP_QUERY, $request->getQueryParams());
+        Context::getInstance()->set(GlobalConst::CONTENT_URI, $request->getUri());
+
         return true;
     }
 
     public static function afterRequest(Request $request, Response $response): void
     {
-        //存储必要数据
-        Di::getInstance()->set(GlobalConst::DI_HTTP_REQUEST, $request);
-        Di::getInstance()->set(GlobalConst::DI_HTTP_QUERY, $request->getQueryParams());
-        Di::getInstance()->set(GlobalConst::DI_URI, $request->getUri());
-
         // TODO: Implement afterAction() method.
     }
 
