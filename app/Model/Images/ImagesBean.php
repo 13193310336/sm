@@ -1,69 +1,54 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午4:25
  */
-namespace App\Model\RoleNode;
+namespace App\Model\Images;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class ImagesBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $img_id;
+    protected $uri;
     protected $created;
     protected $updated;
-    /**
-     * @return mixed
-     */
-    public function getRnId()
-    {
-        return $this->rn_id;
-    }
-
-    /**
-     * @param mixed $rn_id
-     */
-    public function setRnId($rn_id)
-    {
-        $this->rn_id = $rn_id;
-    }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
+    public function getImgId()
     {
-        return $this->role_id;
+        return $this->img_id;
     }
 
     /**
-     * @param mixed $role_id
+     * @param mixed $img_id
      */
-    public function setRoleId($role_id)
+    public function setImgId($img_id)
     {
-        $this->role_id = $role_id;
+        $this->img_id = $img_id;
     }
+
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getUri()
     {
-        return $this->node_id;
+        return $this->uri;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $uri
      */
-    public function setNodeId($node_id)
+    public function setUri($uri)
     {
-        $this->node_id = $node_id;
+        $this->uri = $uri;
     }
+
 
     /**
      * @return mixed
@@ -96,5 +81,4 @@ class RoleNodeBean extends SplBean
     {
         $this->updated = $updated;
     }
-
 }

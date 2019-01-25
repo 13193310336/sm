@@ -1,68 +1,70 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午5:19
  */
-namespace App\Model\RoleNode;
+
+namespace App\Model\AttributeOption;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class AttributeOptionBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $option_id;
+    protected $option_name;
+    protected $option_code;
     protected $created;
     protected $updated;
-    /**
-     * @return mixed
-     */
-    public function getRnId()
-    {
-        return $this->rn_id;
-    }
-
-    /**
-     * @param mixed $rn_id
-     */
-    public function setRnId($rn_id)
-    {
-        $this->rn_id = $rn_id;
-    }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
+    public function getOptionId()
     {
-        return $this->role_id;
+        return $this->option_id;
     }
 
     /**
-     * @param mixed $role_id
+     * @param mixed $option_id
      */
-    public function setRoleId($role_id)
+    public function setOptionId($option_id)
     {
-        $this->role_id = $role_id;
+        $this->option_id = $option_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getOptionName()
     {
-        return $this->node_id;
+        return $this->option_name;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $option_name
      */
-    public function setNodeId($node_id)
+    public function setOptionName($option_name)
     {
-        $this->node_id = $node_id;
+        $this->option_name = $option_name;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getOptionCode()
+    {
+        return $this->option_code;
+    }
+
+    /**
+     * @param mixed $option_code
+     */
+    public function setOptionCode($option_code)
+    {
+        $this->option_code = $option_code;
     }
 
     /**
@@ -96,5 +98,4 @@ class RoleNodeBean extends SplBean
     {
         $this->updated = $updated;
     }
-
 }

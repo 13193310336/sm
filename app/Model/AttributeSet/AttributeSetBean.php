@@ -1,68 +1,68 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午5:09
  */
-namespace App\Model\RoleNode;
+namespace App\Model\AttributeSet;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class AttributeSetBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $set_id;
+    protected $set_name;
+    protected $set_code;
     protected $created;
     protected $updated;
-    /**
-     * @return mixed
-     */
-    public function getRnId()
-    {
-        return $this->rn_id;
-    }
-
-    /**
-     * @param mixed $rn_id
-     */
-    public function setRnId($rn_id)
-    {
-        $this->rn_id = $rn_id;
-    }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
+    public function getSetId()
     {
-        return $this->role_id;
+        return $this->set_id;
     }
 
     /**
-     * @param mixed $role_id
+     * @param mixed $set_id
      */
-    public function setRoleId($role_id)
+    public function setSetId($set_id)
     {
-        $this->role_id = $role_id;
+        $this->set_id = $set_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getSetName()
     {
-        return $this->node_id;
+        return $this->set_name;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $set_name
      */
-    public function setNodeId($node_id)
+    public function setSetName($set_name)
     {
-        $this->node_id = $node_id;
+        $this->set_name = $set_name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSetCode()
+    {
+        return $this->set_code;
+    }
+
+    /**
+     * @param mixed $set_code
+     */
+    public function setSetCode($set_code)
+    {
+        $this->set_code = $set_code;
     }
 
     /**

@@ -1,68 +1,50 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午3:42
  */
-namespace App\Model\RoleNode;
+namespace App\Model\Spec;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class SpecBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $spec_id;
+    protected $spec_name;
     protected $created;
     protected $updated;
     /**
      * @return mixed
      */
-    public function getRnId()
+    public function getSpecId()
     {
-        return $this->rn_id;
+        return $this->spec_id;
     }
 
     /**
-     * @param mixed $rn_id
+     * @param mixed $spec_id
      */
-    public function setRnId($rn_id)
+    public function setSpecId($spec_id)
     {
-        $this->rn_id = $rn_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoleId()
-    {
-        return $this->role_id;
-    }
-
-    /**
-     * @param mixed $role_id
-     */
-    public function setRoleId($role_id)
-    {
-        $this->role_id = $role_id;
+        $this->spec_id = $spec_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getSpecName()
     {
-        return $this->node_id;
+        return $this->spec_name;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $spec_name
      */
-    public function setNodeId($node_id)
+    public function setSpecName($spec_name)
     {
-        $this->node_id = $node_id;
+        $this->spec_name = $spec_name;
     }
 
     /**

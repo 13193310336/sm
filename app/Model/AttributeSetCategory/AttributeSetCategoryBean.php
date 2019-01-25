@@ -1,68 +1,67 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午5:43
  */
-namespace App\Model\RoleNode;
+namespace App\Model\AttributeSetCategory;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class AttributeSetCategoryBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $asc_id;
+    protected $set_id;
+    protected $category_id;
     protected $created;
     protected $updated;
     /**
      * @return mixed
      */
-    public function getRnId()
+    public function getAscId()
     {
-        return $this->rn_id;
+        return $this->asc_id;
     }
 
     /**
-     * @param mixed $rn_id
+     * @param mixed $asc_id
      */
-    public function setRnId($rn_id)
+    public function setAscId($asc_id)
     {
-        $this->rn_id = $rn_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRoleId()
-    {
-        return $this->role_id;
-    }
-
-    /**
-     * @param mixed $role_id
-     */
-    public function setRoleId($role_id)
-    {
-        $this->role_id = $role_id;
+        $this->asc_id = $asc_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getSetId()
     {
-        return $this->node_id;
+        return $this->set_id;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $set_id
      */
-    public function setNodeId($node_id)
+    public function setSetId($set_id)
     {
-        $this->node_id = $node_id;
+        $this->set_id = $set_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * @param mixed $category_id
+     */
+    public function setCategoryId($category_id)
+    {
+        $this->category_id = $category_id;
     }
 
     /**

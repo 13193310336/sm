@@ -1,68 +1,68 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午3:50
  */
-namespace App\Model\RoleNode;
+namespace App\Model\CategorySpec;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class CategorySpecBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $category_spec_id;
+    protected $category_id;
+    protected $spec_id;
     protected $created;
     protected $updated;
-    /**
-     * @return mixed
-     */
-    public function getRnId()
-    {
-        return $this->rn_id;
-    }
-
-    /**
-     * @param mixed $rn_id
-     */
-    public function setRnId($rn_id)
-    {
-        $this->rn_id = $rn_id;
-    }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
+    public function getCategorySpecId()
     {
-        return $this->role_id;
+        return $this->category_spec_id;
     }
 
     /**
-     * @param mixed $role_id
+     * @param mixed $category_spec_id
      */
-    public function setRoleId($role_id)
+    public function setCategorySpecId($category_spec_id)
     {
-        $this->role_id = $role_id;
+        $this->category_spec_id = $category_spec_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getCategoryId()
     {
-        return $this->node_id;
+        return $this->category_id;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $category_id
      */
-    public function setNodeId($node_id)
+    public function setCategoryId($category_id)
     {
-        $this->node_id = $node_id;
+        $this->category_id = $category_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpecId()
+    {
+        return $this->spec_id;
+    }
+
+    /**
+     * @param mixed $spec_id
+     */
+    public function setSpecId($spec_id)
+    {
+        $this->spec_id = $spec_id;
     }
 
     /**
@@ -96,5 +96,4 @@ class RoleNodeBean extends SplBean
     {
         $this->updated = $updated;
     }
-
 }

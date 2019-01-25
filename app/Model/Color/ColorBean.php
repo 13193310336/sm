@@ -1,68 +1,51 @@
 <?php
 /**
  * Created by PhpStorm.
- * Description: 角色节点关联
  * User: original
- * Date: 19-1-8
- * Time: 下午8:44
+ * Date: 19-1-25
+ * Time: 下午3:39
  */
-namespace App\Model\RoleNode;
+namespace App\Model\Color;
 
 use EasySwoole\Spl\SplBean;
 
-class RoleNodeBean extends SplBean
+class ColorBean extends SplBean
 {
-    protected $rn_id;
-    protected $role_id;
-    protected $node_id;
+    protected $color_id;
+    protected $color_name;
     protected $created;
     protected $updated;
-    /**
-     * @return mixed
-     */
-    public function getRnId()
-    {
-        return $this->rn_id;
-    }
-
-    /**
-     * @param mixed $rn_id
-     */
-    public function setRnId($rn_id)
-    {
-        $this->rn_id = $rn_id;
-    }
 
     /**
      * @return mixed
      */
-    public function getRoleId()
+    public function getColorId()
     {
-        return $this->role_id;
+        return $this->color_id;
     }
 
     /**
-     * @param mixed $role_id
+     * @param mixed $color_id
      */
-    public function setRoleId($role_id)
+    public function setColorId($color_id)
     {
-        $this->role_id = $role_id;
+        $this->color_id = $color_id;
     }
 
     /**
      * @return mixed
      */
-    public function getNodeId()
+    public function getColorName()
     {
-        return $this->node_id;
+        return $this->color_name;
     }
 
     /**
-     * @param mixed $node_id
+     * @param mixed $color_name
      */
-    public function setNodeId($node_id)
+    public function setColorName($color_name)
     {
-        $this->node_id = $node_id;
+        $this->color_name = $color_name;
     }
 
     /**
@@ -96,5 +79,4 @@ class RoleNodeBean extends SplBean
     {
         $this->updated = $updated;
     }
-
 }
