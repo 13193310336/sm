@@ -163,7 +163,7 @@ abstract class Model
     {
         if ($primary)
             return $this->getConnect()->where($this->getPrimary(), $primary)->getOne($this->getTable());
-        else
+        else if ($primary === false)
             return $this->getConnect()->getOne($this->getTable());
     }
 

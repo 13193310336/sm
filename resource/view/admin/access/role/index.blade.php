@@ -16,7 +16,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>系统设置<small>节点列表</small></h2>
+                        <h2>用户管理<small>分组列表</small></h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -24,17 +24,19 @@
                             <table class="table table-striped jambo_table bulk_action">
                                 <thead>
                                     <tr class="headings">
-                                        <th class="column-title">节点类型 </th>
-                                        <th class="column-title">节点名称</th>
-                                        <th class="column-title">节点路径</th>
+                                        <th class="column-title">分组ID</th>
+                                        <th class="column-title">分组名称</th>
+                                        <th class="column-title">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($data as $datum)
                                         <tr class="even pointer">
-                                            <td class=" ">{{ \App\Model\Node\NodeModel::TYPE_COLLECTION[$datum['type']] }}</td>
-                                            <td class=" ">{{ $datum['name'] }}</td>
-                                            <td class=" ">{{ $datum['uri'] }}</td>
+                                            <td class=" ">{{ $datum['role_id'] }}</td>
+                                            <td class=" ">{{ $datum['role_name'] }}</td>
+                                            <td class=" ">
+                                                <a class="btn btn-primary" href="{{ \App\Component\url('admin/access/role/edit?id=' . $datum['role_id']) }}"> <i class="fa fa-edit"></i> Edit </a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

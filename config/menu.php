@@ -14,12 +14,12 @@ return [
                 'menuName' => '系统设置',
                 'menuItem' => [
                     [
-                        'itemName' => '节点管理',
-                        'itemUri'  => 'admin/access/node'
+                        'itemName' => '添加节点',
+                        'itemUri'  => 'admin/access/node/create'
                     ],
                     [
-                        'itemName' => '权限管理',
-                        'itemUri'  => ''
+                        'itemName' => '节点列表',
+                        'itemUri'  => 'admin/access/node'
                     ],
                 ]
             ],
@@ -28,13 +28,21 @@ return [
                 'menuName' => '用户管理',
                 'menuItem' => [
                     [
-                        'itemName' => '分组管理',
-                        'itemUri'  => ''
+                        'itemName' => '添加分组',
+                        'itemUri'  => 'admin/access/role/create'
                     ],
                     [
-                        'itemName' => '用户管理',
-                        'itemUri'  => ''
+                        'itemName' => '分组列表',
+                        'itemUri'  => 'admin/access/role'
                     ],
+                    [
+                        'itemName' => '创建用户',
+                        'itemUri'  => 'admin/auth/user/create'
+                    ],
+                    [
+                        'itemName' => '用户列表',
+                        'itemUri'  => 'admin/auth/user'
+                    ]
                 ]
             ]
         ]

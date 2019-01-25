@@ -10,6 +10,8 @@ namespace App\Model\RoleNode;
 
 
 use App\Model\Model;
+use App\Model\Node\NodeModel;
+use EasySwoole\Spl\SplArray;
 
 class RoleNodeModel extends Model
 {
@@ -70,5 +72,25 @@ class RoleNodeModel extends Model
             $query->where('role_id', $role);
 
         return $query->delete($this->table);
+    }
+
+    /**
+     * 获取分组节点
+     * @param bool $roleId
+     * @return array
+     */
+    public function getRelation($roleId = false)
+    {
+        $nodeModel = new NodeModel();
+        $node = $nodeModel->getConnect()->get($nodeModel->getTable());
+        $roleNode = [];
+        if ($roleId) {
+            $roleNode = $this->getConnect()->where('role_id', $roleId)->get($this->getTable());
+            $roleNode = (new SplArray($roleNode))->column('node_id')->getArrayCopy();
+        }
+        return [
+            'node' => $node,
+            'roleNode' => $roleNode
+        ];
     }
 }

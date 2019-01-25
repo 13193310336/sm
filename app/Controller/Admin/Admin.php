@@ -42,11 +42,13 @@ class Admin extends Controller
     }
 
     //ajax信息返回
-    public function jsonResponse($data = [], $code = Code::SUCCESS, $message = Code::MESSAGE[Code::SUCCESS])
+    public function jsonResponse($data = [], $code = Code::SUCCESS, $message = null)
     {
-        $this->response()->write(json_encode([
+        $this->response()
+            ->withHeader('Content-type', 'application/json; charset=UTF-8')
+            ->write(json_encode([
             'code' => $code,
-            'message' => $message,
+            'message' => $message ?: Code::MESSAGE[$code],
             'data' => $data
         ]));
     }

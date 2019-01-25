@@ -64,6 +64,24 @@ class UserModel extends Model
         return $user;
     }
 
+    public function updateUser($userId, $userName, $role, $password = false)
+    {
+        $updateArray = [
+            'id' => $userId,
+            'name' => $userName,
+            'role' => $role
+        ];
+
+        if ($password)
+            $updateArray['password'] = Hash::makePasswordHash($password);
+
+        return $this
+            ->getConnect()
+            ->where('id', $userId)
+            ->update($this->getTable(), $updateArray);
+
+    }
+
     /**
      * 得到一个用户
      * @param $value
@@ -76,6 +94,28 @@ class UserModel extends Model
             ->getConnect()
             ->where($field, $value)
             ->getOne($this->table);
+    }
+
+    /**
+     * @param $account
+     * @param $name
+     * @param $role
+     * @return array
+     */
+    public function getUserList($account, $name, $role)
+    {
+        $query = $this->getConnect();
+
+        if ($account)
+            $query->where('account', $account);
+
+        if ($name)
+            $query->where('name', $name);
+
+        if ($role)
+            $query->where('role', $role);
+
+        return $this->page($query);
     }
 
     /**
