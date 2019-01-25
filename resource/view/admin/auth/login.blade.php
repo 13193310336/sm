@@ -94,13 +94,10 @@
 
 @push('script')
     <script>
-        var userName = $('#account').val(),
-            password = $('#password').val();
-        console.log(userName);
-        console.log(password);
-
         $(function () {
            $('.submit').click(function () {
+               var userName = $('#account').val(),
+                   password = $('#password').val();
                $.post('{{ \App\Component\url('admin/auth/auth/doLogin') }}', {userName: userName, password: password}, function (response) {
                    window.location.href = '{{ \App\Component\url('admin/main/console') }}';
                })

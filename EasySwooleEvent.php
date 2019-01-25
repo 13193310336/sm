@@ -45,8 +45,8 @@ class EasySwooleEvent implements Event
         //注册blade引擎
         Di::getInstance()->set(
             GlobalConst::DI_BLADE, new BladeInstance(
-                Config::getInstance()->getConf('template.path'),
-                Config::getInstance()->getConf('template.cachePath')
+                config('template.path'),
+                config('template.cachePath')
             )
         );
     }
@@ -63,7 +63,6 @@ class EasySwooleEvent implements Event
         Context::getInstance()->set(GlobalConst::CONTENT_HTTP_REQUEST, $request);
         Context::getInstance()->set(GlobalConst::CONTENT_HTTP_QUERY, $request->getQueryParams());
         Context::getInstance()->set(GlobalConst::CONTENT_URI, $request->getUri());
-
         return true;
     }
 

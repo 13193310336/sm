@@ -35,7 +35,7 @@ class Auth extends Admin
         $model = new UserModel();
         $account = $this->request()->getParsedBody('userName');
         $password = $this->request()->getParsedBody('password');
-        if (!$model->checkUser($account, $password, $this->session()))
+        if (!$model->checkUser($account, $password))
             $this->jsonResponse([], Code::ACCESS, '认证失败');
         else
             $this->jsonResponse();

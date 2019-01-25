@@ -14,6 +14,7 @@ use App\Model\Role\RoleModel;
 use App\Model\User\UserModel;
 use App\Service\Admin\Auth\AuthService;
 use Co\Http\Response;
+use EasySwoole\Component\Context;
 use EasySwoole\Component\Di;
 use EasySwoole\Http\AbstractInterface\Controller;
 use Swoole\Http\Request;
@@ -62,6 +63,8 @@ class Admin extends Controller
     {
         //开启session
         $this->session()->start();
+        Context::getInstance()->set(GlobalConst::CONTEXT_SESSION, $this->session());
+
 
         //用户判断
         $this->auth = $authService = new AuthService(

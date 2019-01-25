@@ -9,9 +9,9 @@
 namespace App\Model\User;
 
 
+use App\Component\GlobalConst;
 use App\Model\Model;
-use EasySwoole\Http\Request;
-use EasySwoole\Http\Session\Session;
+use EasySwoole\Component\Context;
 use EasySwoole\Utility\Hash;
 
 class UserModel extends Model
@@ -122,11 +122,11 @@ class UserModel extends Model
      * 检查用户登录
      * @param $account
      * @param $password
-     * @param Session|null $sessionServer
      * @return bool
      */
-    public function checkUser($account, $password, Session $sessionServer = null)
+    public function checkUser($account, $password)
     {
+        $sessionServer = Context::getInstance()->get(GlobalConst::CONTEXT_SESSION);
         $user = $this->getUser($account);
         if ($user && Hash::validatePasswordHash($password, $user['password'])) {
             if ($sessionServer) {

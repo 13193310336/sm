@@ -14,14 +14,16 @@ class GlobalConst
     const DI_BLADE = 'DI_BLADE';
 
     //httpRequest Content常亮
-    const CONTENT_HTTP_REQUEST = 'DI_HTTP_REQUEST';
+    const CONTENT_HTTP_REQUEST = 'CO_HTTP_REQUEST';
 
     //get参数CONTENT常量
-    const CONTENT_HTTP_QUERY = 'DI_HTTP_QUERY';
+    const CONTENT_HTTP_QUERY = 'CO_HTTP_QUERY';
 
     //uri参数CONTENT常量
-    const CONTENT_URI = 'DI_URI';
+    const CONTENT_URI = 'CO_URI';
 
+    //session参数context常亮
+    const CONTEXT_SESSION = 'CO_SESSION';
     //路由message字段
     const URI_MESSAGE_FIELD = 'MESSAGE';
 
