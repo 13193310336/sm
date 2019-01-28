@@ -13,11 +13,9 @@ use App\Component\Pool\MysqlObject;
 use App\Component\Pool\MysqlPool;
 use function App\Component\url;
 use Carbon\Carbon;
-use EasySwoole\Component\Context;
-use EasySwoole\Component\Di;
+use EasySwoole\Component\Context\ContextManager;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\Spl\SplBean;
-use PhpParser\Node\Scalar\String_;
 
 abstract class Model
 {
@@ -42,37 +40,38 @@ abstract class Model
         if (!$object)
             $this->object = PoolManager::getInstance()->getPool(MysqlPool::class)->getObj(config('database.mysql.POOL_TIME_OUT'));
 
-        $this->setTable();
-        $this->setPrimary();
-        $this->setBean();
+        $this->table();
+        $this->primaryKey();
+        $this->bean();
     }
 
     /**
      * 设置表名
      * @return string
      */
-    abstract protected function setTable();
+    abstract protected function table();
 
     /**
      * 设置主键
      * @return string
      */
-    abstract protected function setPrimary();
+    abstract protected function primaryKey();
 
     /**
      * 设置Bean
      * @return string
      */
-    abstract protected function setBean();
+    abstract protected function bean();
 
     /**
      * 得到bean对象
-     * @param $data
-     * @return SplBean
+     * @param array $data
+     * @return object
      */
-    public function getBean($data): SplBean
+    public function getBean(Array $data = [])
     {
-        return new $this->bean($data);
+        $reflection = new \ReflectionClass($this->bean);
+        return $reflection->newInstanceArgs($data);
     }
 
 
@@ -113,7 +112,7 @@ abstract class Model
     public function page(MysqlObject $query, string $select = '*', int $pageSize = 15)
     {
         $page = 1;
-        $httpQuery = Context::getInstance()->get(GlobalConst::CONTENT_HTTP_QUERY);
+        $httpQuery = ContextManager::getInstance()->get(GlobalConst::CONTENT_HTTP_QUERY);
         !isset($httpQuery['page']) ?:  $page = $httpQuery['page'];
         //总数
         $total = $query->count($this->getTable());
@@ -129,7 +128,7 @@ abstract class Model
         $endRows = $startRows + $pageSize;
         //数据
         $data = $query->get($this->getTable(), [$startRows, $pageSize], $select);
-        $url = url(trim(Context::getInstance()->get(GlobalConst::CONTENT_URI)->getPath(), '/'));
+        $url = url(trim(ContextManager::getInstance()->get(GlobalConst::CONTENT_URI)->getPath(), '/'));
         $httpQuery['page'] = $page;
         $currentUrl = $url . '?' . http_build_query($httpQuery);
         $httpQuery['page'] = $prevPage;

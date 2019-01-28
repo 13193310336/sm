@@ -14,5 +14,5 @@ return [
     /**
      * 模板缓存路径
      */
-    'cachePath' => EASYSWOOLE_ROOT . 'storage/view'
+    'cachePath' => EASYSWOOLE_ROOT . '/storage/view'
 ];

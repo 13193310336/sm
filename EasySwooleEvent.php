@@ -14,7 +14,7 @@ use App\Component\EasySwooleEventHelper;
 use App\Component\GlobalConst;
 use App\Component\Pool\MysqlPool;
 use duncan3dc\Laravel\BladeInstance;
-use EasySwoole\Component\Context;
+use EasySwoole\Component\Context\ContextManager;
 use EasySwoole\Component\Di;
 use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
@@ -30,13 +30,16 @@ class EasySwooleEvent implements Event
         // 设置时区
         date_default_timezone_set('Asia/Shanghai');
 
+        //加载自定义命令
+        EasySwooleEventHelper::loadConsole();
+
         //加载自定义配置
         EasySwooleEventHelper::loadConf();
 
         //设置控制器路径
         Di::getInstance()->set(
             SysConst::HTTP_CONTROLLER_NAMESPACE,
-            config('app.controllerNameSpace')
+            config('app.controllerNamespace')
         );
 
         //注册mysql连接池
@@ -60,9 +63,9 @@ class EasySwooleEvent implements Event
     {
         // TODO: Implement onRequest() method.
         //存储必要数据
-        Context::getInstance()->set(GlobalConst::CONTENT_HTTP_REQUEST, $request);
-        Context::getInstance()->set(GlobalConst::CONTENT_HTTP_QUERY, $request->getQueryParams());
-        Context::getInstance()->set(GlobalConst::CONTENT_URI, $request->getUri());
+        ContextManager::getInstance()->set(GlobalConst::CONTENT_HTTP_REQUEST, $request);
+        ContextManager::getInstance()->set(GlobalConst::CONTENT_HTTP_QUERY, $request->getQueryParams());
+        ContextManager::getInstance()->set(GlobalConst::CONTENT_URI, $request->getUri());
         return true;
     }
 

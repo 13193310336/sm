@@ -14,19 +14,19 @@ use App\Model\Model;
 class AttributeModel extends  Model
 {
 
-    public function setTable()
+    public function table()
     {
         $this->table = 'attribute';
     }
 
-    public function setPrimary()
+    public function primaryKey()
     {
         $this->primaryKey = 'set_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = AttributeBean::class;
     }
 }

@@ -15,19 +15,19 @@ use EasySwoole\Spl\SplArray;
 
 class RoleNodeModel extends Model
 {
-    protected function setTable()
+    protected function table()
     {
         // TODO: Implement getTable() method.
         $this->table = 'role_node';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
         // TODO: Implement getPrimary() method.
         $this->primaryKey = 'rn_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
         // TODO: Implement getBean() method.
         $this->bean = RoleNodeBean::class;

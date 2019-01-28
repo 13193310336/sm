@@ -20,19 +20,19 @@ class NodeModel extends Model
         self::TYPE_BUTTON => '按钮类型'
     ];
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
         // TODO: Implement getPrimary() method.
         $this->primaryKey = 'node_id';
     }
 
-    protected function setTable()
+    protected function table()
     {
         // TODO: Implement getTable() method.
         $this->table = 'node';
     }
 
-    protected function setBean()
+    protected function bean()
     {
         // TODO: Implement getBean() method.
         $this->bean = NodeBean::class;

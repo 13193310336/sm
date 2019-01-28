@@ -14,21 +14,21 @@ use App\Model\Model;
 class SpuImagesModel extends Model
 {
 
-    protected function setTable()
+    protected function table()
     {
-        // TODO: Implement setTable() method.
+        // TODO: Implement table() method.
         $this->table = 'spu_images';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
-        // TODO: Implement setPrimary() method.
+        // TODO: Implement primaryKey() method.
         $this->primaryKey = 'spu_img_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = SpuImagesBean::class;
     }
 

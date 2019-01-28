@@ -9,6 +9,8 @@
 namespace App\Component;
 
 
+use App\Component\Console\MigrateConsole;
+use EasySwoole\EasySwoole\Command\CommandContainer;
 use EasySwoole\EasySwoole\Config;
 use EasySwoole\Utility\File;
 
@@ -30,4 +32,13 @@ class EasySwooleEventHelper
             }
         }
     }
+
+    /**
+     * 加载命令行
+     */
+    public static function loadConsole()
+    {
+        CommandContainer::getInstance()->set(new MigrateConsole());
+    }
+
 }

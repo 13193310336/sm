@@ -9,7 +9,7 @@ namespace App\Model\AttributeSet;
 
 use EasySwoole\Spl\SplBean;
 
-class AttributeSetBean extends SplBean
+class Attributebean extends SplBean
 {
     protected $set_id;
     protected $set_name;

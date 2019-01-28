@@ -15,21 +15,21 @@ use App\Model\Model;
 class CategoryColorModel extends Model
 {
 
-    protected function setTable()
+    protected function table()
     {
-        // TODO: Implement setTable() method.
+        // TODO: Implement table() method.
         $this->table = 'category_color';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
-        // TODO: Implement setPrimary() method.
+        // TODO: Implement primaryKey() method.
         $this->primaryKey = 'category_color_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = CategoryColorBean::class;
     }
 }

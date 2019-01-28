@@ -14,21 +14,21 @@ use App\Model\Model;
 class AttributeOptionRelationModel extends Model
 {
 
-    protected function setTable()
+    protected function table()
     {
-        // TODO: Implement setTable() method.
+        // TODO: Implement table() method.
         $this->table = 'attribute_option';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
-        // TODO: Implement setPrimary() method.
+        // TODO: Implement primaryKey() method.
         $this->primaryKey = 'ao_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = AttributeOptionRelationModel::class;
     }
 }

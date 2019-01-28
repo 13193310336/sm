@@ -24,8 +24,10 @@ class GlobalConst
 
     //session参数context常亮
     const CONTEXT_SESSION = 'CO_SESSION';
+
     //路由message字段
     const URI_MESSAGE_FIELD = 'MESSAGE';
 
-
+    //自定义命令中参数ALL的值
+    const COMMAND_ALL = 'all';
 }

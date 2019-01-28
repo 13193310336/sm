@@ -10,14 +10,11 @@ namespace App\Controller\Admin;
 use App\Component\Code;
 use App\Component\GlobalConst;
 use function App\Component\url;
-use App\Model\Role\RoleModel;
 use App\Model\User\UserModel;
 use App\Service\Admin\Auth\AuthService;
-use Co\Http\Response;
-use EasySwoole\Component\Context;
+use EasySwoole\Component\Context\ContextManager;
 use EasySwoole\Component\Di;
 use EasySwoole\Http\AbstractInterface\Controller;
-use Swoole\Http\Request;
 
 class Admin extends Controller
 {
@@ -63,7 +60,7 @@ class Admin extends Controller
     {
         //开启session
         $this->session()->start();
-        Context::getInstance()->set(GlobalConst::CONTEXT_SESSION, $this->session());
+        ContextManager::getInstance()->set(GlobalConst::CONTEXT_SESSION, $this->session());
 
 
         //用户判断

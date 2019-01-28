@@ -15,17 +15,17 @@ use App\Model\RoleNode\RoleNodeModel;
 
 class RoleModel extends Model
 {
-    protected function setTable()
+    protected function table()
     {
         $this->table = 'role';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
         $this->primaryKey = 'role_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
         $this->bean = RoleBean::class;
     }

@@ -15,21 +15,21 @@ use App\Model\Model;
 class AttributeSetModel extends Model
 {
 
-    protected function setTable()
+    protected function table()
     {
-        // TODO: Implement setTable() method.
+        // TODO: Implement table() method.
         $this->table = 'attribute_set';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
-        // TODO: Implement setPrimary() method.
+        // TODO: Implement primaryKey() method.
         $this->primaryKey = 'set_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
-        $this->bean = AttributeSetBean::class;
+        // TODO: Implement bean() method.
+        $this->bean = Attributebean::class;
     }
 }

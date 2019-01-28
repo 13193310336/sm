@@ -13,21 +13,21 @@ use App\Model\Model;
 
 class SkuModel extends Model
 {
-    protected function setTable()
+    protected function table()
     {
-        // TODO: Implement setTable() method.
+        // TODO: Implement table() method.
         $this->table = 'sku';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
-        // TODO: Implement setPrimary() method.
+        // TODO: Implement primaryKey() method.
         $this->primaryKey = 'sku_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = SkuBean::class;
     }
 }

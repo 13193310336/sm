@@ -15,19 +15,19 @@ use App\Model\Model;
 class HistoryPriceModel extends Model
 {
 
-    protected function setTable()
+    protected function table()
     {
         $this->table = 'history_price';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
         $this->primaryKey = 'history_price_id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
-        // TODO: Implement setBean() method.
+        // TODO: Implement bean() method.
         $this->bean = HistoryPriceBean::class;
     }
 }

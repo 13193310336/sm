@@ -11,7 +11,7 @@ namespace App\Model\User;
 
 use App\Component\GlobalConst;
 use App\Model\Model;
-use EasySwoole\Component\Context;
+use EasySwoole\Component\Context\ContextManager;
 use EasySwoole\Utility\Hash;
 
 class UserModel extends Model
@@ -23,17 +23,17 @@ class UserModel extends Model
         self::TYPE_ADMIN => '后台用户'
     ];
 
-    protected function setTable()
+    protected function table()
     {
         $this->table = 'user';
     }
 
-    protected function setPrimary()
+    protected function primaryKey()
     {
         $this->primaryKey = 'id';
     }
 
-    protected function setBean()
+    protected function bean()
     {
         $this->bean = UserBean::class;
     }
@@ -126,7 +126,7 @@ class UserModel extends Model
      */
     public function checkUser($account, $password)
     {
-        $sessionServer = Context::getInstance()->get(GlobalConst::CONTEXT_SESSION);
+        $sessionServer = ContextManager::getInstance()->get(GlobalConst::CONTEXT_SESSION);
         $user = $this->getUser($account);
         if ($user && Hash::validatePasswordHash($password, $user['password'])) {
             if ($sessionServer) {
