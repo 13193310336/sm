@@ -8,7 +8,6 @@
 
 namespace App\Model\Attribute;
 
-
 use App\Model\Model;
 
 class AttributeModel extends  Model
@@ -21,12 +20,12 @@ class AttributeModel extends  Model
 
     public function primaryKey()
     {
-        $this->primaryKey = 'set_id';
+        $this->primaryKey = 'attribute_id';
     }
 
     protected function bean()
     {
-        // TODO: Implement bean() method.
         $this->bean = AttributeBean::class;
     }
+
 }

@@ -11,12 +11,69 @@ use EasySwoole\Spl\SplBean;
 
 class AttributeBean extends SplBean
 {
+    /**
+     * @primary         true
+     * @autoIncrement   true
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @typeFloat       0
+     * @index           false
+     * @indexType       false
+     * @indexMethod     false
+     * @comment         主键
+     */
     protected $attribute_id;
+
+    /**
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         属性名称
+     */
     protected $attribute_name;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @index           true
+     * @indexType       unique
+     * @indexMethod     BTREE
+     * @comment         属性code
+     */
     protected $attribute_code;
+
+    /**
+     * @var
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         属性类型
+     */
     protected $attribute_type;
+
+    /**
+     * @var
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         是否必选
+     */
     protected $attribute_must;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
     /**
      * @return mixed

@@ -19,27 +19,54 @@ use EasySwoole\Spl\SplBean;
 
 abstract class Model
 {
+    /**
+     * 链接对象
+     * @var MysqlObject
+     */
     private $object;
 
+    /**
+     * 模型回收时是否自动释放连接池链接
+     * @var bool
+     */
+    private $autoReleaseConnect;
+
+    /**
+     * 数据表名称
+     * @var string
+     */
     protected $table = '';
 
+    /**
+     * 数据表主键
+     * @var string
+     */
     protected $primaryKey = '';
 
     /**
+     * 数据模型Bean对象
      * @var SplBean|null
      */
     protected $bean = null;
 
-    public function __construct(MysqlObject $object = null)
+    /**
+     * Model constructor.
+     * @param MysqlObject|null $object  链接
+     * @param bool $autoGetConnect      链接不存在是否自动获取链接
+     * @param bool $autoReleaseConnect  是否自动释放链接
+     */
+    public function __construct(MysqlObject $object = null, $autoGetConnect = true, $autoReleaseConnect = true)
     {
         $this->object = $object;
-
+        $this->autoReleaseConnect = $autoReleaseConnect;
         /**
          * 如果没有传入链接，从连接池取一个
          */
-        if (!$object)
-            $this->object = PoolManager::getInstance()->getPool(MysqlPool::class)->getObj(config('database.mysql.POOL_TIME_OUT'));
-
+        if (!$object && $autoReleaseConnect) {
+            $this->object = PoolManager::getInstance()
+                ->getPool(MysqlPool::class)
+                ->getObj(config('database.mysql.POOL_TIME_OUT'));
+        }
         $this->table();
         $this->primaryKey();
         $this->bean();
@@ -68,21 +95,10 @@ abstract class Model
      * @param array $data
      * @return object
      */
-    public function getBean(Array $data = [])
+    public function getDataBean(Array $data = [])
     {
         $reflection = new \ReflectionClass($this->bean);
         return $reflection->newInstanceArgs($data);
-    }
-
-
-    public function getTable(): string
-    {
-        return $this->table;
-    }
-
-    public function getPrimary(): String
-    {
-        return $this->primaryKey;
     }
 
     /**
@@ -173,7 +189,7 @@ abstract class Model
      */
     public function insert(array $data)
     {
-        $bean = $this->getBean($data);
+        $bean = $this->getDataBean($data);
         $bean->setCreated(Carbon::now());
         $bean->setUpdated(Carbon::now());
         $insertResult = $this->getConnect()->insert($this->getTable(), $bean->toArray(null, SplBean::FILTER_NOT_NULL));
@@ -188,7 +204,7 @@ abstract class Model
      */
     public function update($primary, array $data)
     {
-        $bean = $this->getBean($data);
+        $bean = $this->getDataBean($data);
         $bean->setUpdated(Carbon::now());
         return $this
             ->getConnect()
@@ -196,8 +212,30 @@ abstract class Model
             ->update($this->getTable(), $bean->toArray(null, SplBean::FILTER_NOT_NULL));
     }
 
+    public function getBean(): string
+    {
+        return $this->bean;
+    }
+
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
+    public function getPrimary(): String
+    {
+        return $this->primaryKey;
+    }
+
+    public function getIndex()
+    {
+        return $this->index;
+    }
+
     public function __destruct()
     {
-        $this->recoveryConnect();
+        if ($this->autoReleaseConnect) {
+            $this->recoveryConnect();
+        }
     }
 }

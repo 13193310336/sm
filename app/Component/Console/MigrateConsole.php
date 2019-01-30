@@ -9,6 +9,7 @@ namespace App\Component\Console;
 
 use function App\Component\config;
 use App\Component\GlobalConst;
+use App\Model\Model;
 use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
 
@@ -16,6 +17,8 @@ class MigrateConsole implements CommandInterface
 {
 
     protected $modelDirectory = EASYSWOOLE_ROOT . '/app/Model';
+
+    protected $fieldSqlMap = [];
 
     public function commandName(): string
     {
@@ -25,14 +28,161 @@ class MigrateConsole implements CommandInterface
     public function exec(array $args):? string
     {
         $tableName = array_first($args);
-
-        if (!$tableName)
-            return "\e[36m参数\e[0m arg \e[36m不合法\e[0m";
-
+        if (!$tableName) {
+            return Utility::easySwooleLog() . "\e[36m参数\e[0m arg \e[36m不合法\e[0m";
+        }
         $tableNameMap = $this->tableNameMap();
+        if (strtolower($tableName) != GlobalConst::COMMAND_ALL && !isset($tableNameMap[$tableName])) {
+            return Utility::easySwooleLog() . "\e[36m 数据表\e[0m $tableName \e[36m不存在,请确认该参数已在模型table()方法中返回\e[0m";
+        }
+        $returnMessage = Utility::easySwooleLog();
+        if (isset($tableNameMap[$tableName])) {
+            $returnMessage .= $this->analysisProperty($tableNameMap[$tableName]);
+        } else {
+            foreach ($tableNameMap as $tableModel) {
+                $returnMessage .= $this->analysisProperty($tableModel);
+            }
+        }
+        return '';
+    }
 
+    /**
+     * 拼装创建表Sql语句
+     * @param $tableName
+     * @return string
+     */
+    protected function makeCreateSql($tableName)
+    {
+        $tableFields = $this->fieldSqlMap[$tableName];
+        $sql = 'CREATE TABLE ' . $tableName . '(';
+        $sqlIndex = '';
+        foreach ($tableFields as $field => $attribute) {
+            $sql .= $this->getCreateAttributeString($field, $attribute);
+            $sqlIndex .= $this->getCreateAttributeIndexString($field, $attribute);
+        }
+        $sql .= trim($sqlIndex, ',');
+        $sql .= ')';
+        return $sql;
+    }
 
-        return null;
+    /**
+     * 拼装字段属性内容
+     * @param string $field
+     * @param array $attributes
+     * @return string
+     */
+    protected function getCreateAttributeString(string $field, array $attributes): string
+    {
+        $string = '`' . $field . '`';
+
+        /**
+         * 拼装类型
+         */
+        $string .= ' ' . $attributes['type'];
+        if ((bool)$attributes['typeFloat']) {
+            $string .= '(' . $attributes['typeLength'] . ',' . $attributes['typeFloat'] . ')';
+        } else {
+            $string .= '(' . $attributes['typeLength'] . ')';
+        }
+
+        /**
+         * 是否为空
+         */
+        if ((bool)$attributes['notNull']) {
+            $string .= ' NOT NULL';
+        } else {
+            $string .= ' NULL';
+        }
+
+        /**
+         * 拼装自动递增
+         */
+        if ((bool)$attributes['autoIncrement']) {
+            $string .= ' AUTO_INCREMENT';
+        }
+
+        /**
+         * 拼装注释
+         */
+        if ((bool)$attributes['comment']) {
+            $string .= ' COMMENT \'' . $attributes['comment'] . '\'';
+        }
+
+        return $string . ',';
+    }
+
+    /**
+     * 拼装字段索引
+     * @param $field
+     * @param array $attributes
+     * @return string
+     */
+    public function getCreateAttributeIndexString($field,  array $attributes): string
+    {
+        $string = '';
+            if ($attributes['primary']) {
+                $string .= 'PRIMARY KEY (`' . $field . '`),';
+            }
+
+            if ($attributes['index']) {
+                if (strtoupper($attributes['indexType']) == 'NORMAL') {
+                    $string .= 'INDEX `' . $field . '_NORMAL' . '` (`' . $field . '`) USING ' . strtoupper($attributes['indexMethod']) . ',';
+                }
+                if (strtoupper($attributes['indexType']) == 'UNIQUE') {
+                    $string .= 'UNIQUE INDEX `' . $field . '_UNIQUE' . '` (`' . $field . '`) USING ' . strtoupper($attributes['indexMethod']) . ',';
+                }
+                if (strtoupper($attributes['indexType']) == 'FULLTEXT') {
+                    $string .= 'FULLTEXT INDEX `' . $field . '_FULLTEXT' . '` (`' . $field . '`) USING ' . strtoupper($attributes['indexMethod']) . ',';
+                }
+            }
+
+        return $string;
+    }
+    
+
+    /**
+     * 分析数据属性
+     * @param Model $model
+     * @return string
+     */
+    protected function analysisProperty(Model $model): string
+    {
+        $tableName = $model->getTable();
+        $beanClass = $model->getBean();
+        $reflectionClass = new \ReflectionClass($beanClass);
+        foreach ($reflectionClass->getProperties() as $property) {
+            $reflectionProperty = new \ReflectionProperty($beanClass, $property->name);
+            $this->fieldSqlMap[$tableName][$property->name]
+                = $this->analysisPropertiesDocument($reflectionProperty->getDocComment());
+        }
+        return $this->makeCreateSql($tableName);
+    }
+
+    /**
+     * 分析属性注释
+     * @param $string
+     * @return array
+     */
+    protected function analysisPropertiesDocument($string)
+    {
+        $analysisKey = [
+            'primary'       => false,
+            'autoIncrement' => false,
+            'notNull'       => false,
+            'type'          => false,
+            'typeLength'    => false,
+            'typeFloat'     => false,
+            'index'         => false,
+            'indexType'     => false,
+            'indexMethod'   => false,
+            'comment'       => false
+        ];
+        foreach ($analysisKey as $key => $item) {
+            preg_match('/@' . $key . '\s+(.*)\n/', $string, $matchArray);
+            if (isset($matchArray[1]))
+                $analysisKey[$key] = $matchArray[1];
+        }
+        return $analysisKey;
     }
 
     /**
@@ -47,7 +197,11 @@ class MigrateConsole implements CommandInterface
                 $reflection = new \ReflectionClass($className);
                 if ($this->getTopParentClass($reflection) == config('app.baseModel'))
                 {
-                    $itemInstance = $reflection->newInstanceArgs();
+                    $itemInstance = $reflection->newInstanceArgs([
+                        'object'                => null,
+                        'autoGetConnect'        => false,
+                        'autoReleaseConnect'    => false
+                    ]);
                     $map[$itemInstance->getTable()] = $itemInstance;
                 }
             }

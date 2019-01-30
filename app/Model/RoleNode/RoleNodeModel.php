@@ -29,7 +29,7 @@ class RoleNodeModel extends Model
 
     protected function bean()
     {
-        // TODO: Implement getBean() method.
+        // TODO: Implement getDataBean() method.
         $this->bean = RoleNodeBean::class;
     }
 
