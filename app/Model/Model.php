@@ -227,11 +227,6 @@ abstract class Model
         return $this->primaryKey;
     }
 
-    public function getIndex()
-    {
-        return $this->index;
-    }
-
     public function __destruct()
     {
         if ($this->autoReleaseConnect) {

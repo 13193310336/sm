@@ -11,9 +11,42 @@ use EasySwoole\Spl\SplBean;
 
 class RoleBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @autoIncrement   true
+     * @comment         逐渐
+     */
     protected $role_id;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @comment         角色名称
+     */
     protected $role_name;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

@@ -11,13 +11,77 @@ use EasySwoole\Spl\SplBean;
 
 class HistoryPriceBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @autoIncrement   true
+     * @comment         逐渐
+     */
     protected $history_price_id;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @comment         价格ID
+     */
     protected $price_id;
+
+
+    /**
+     * @var
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @notNull         true
+     * @comment         上次价格
+     */
     protected $last_price;
+
+
+    /**
+     * @var
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @notNull         true
+     * @comment         当前价格
+     */
     protected $price;
+
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         改价原因
+     */
     protected $change_reason;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
     protected $updated;
+
+
     /**
      * @return mixed
      */

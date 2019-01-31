@@ -11,10 +11,51 @@ use EasySwoole\Spl\SplBean;
 
 class AttributeSetCategoryBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @autoIncrement   true
+     * @notNull         true
+     * @comment         主键
+     */
     protected $asc_id;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @comment         集合ID
+     */
     protected $set_id;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         栏目ID
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
     protected $updated;
     /**
      * @return mixed

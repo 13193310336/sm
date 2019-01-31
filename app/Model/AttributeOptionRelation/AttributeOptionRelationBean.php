@@ -11,11 +11,58 @@ use EasySwoole\Spl\SplBean;
 
 class AttributeOptionRelationBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @autoIncrement   true
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $ao_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         属性集ID
+     */
     protected $set_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         属性ID
+     */
     protected $attribute_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         属性选项ID
+     */
     protected $option_id;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

@@ -11,11 +11,61 @@ use EasySwoole\Spl\SplBean;
 
 class CategoryBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @autoIncrement   true
+     * @comment         逐渐
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @comment         栏目名称
+     */
     protected $category_name;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         栏目等级
+     */
     protected $category_level;
+
+    /**
+     * @var
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @notNull         true
+     * @comment         栏目均价
+     */
     protected $category_avg_price;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
     protected $updated;
     /**
      * @return mixed

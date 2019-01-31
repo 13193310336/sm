@@ -11,10 +11,51 @@ use EasySwoole\Spl\SplBean;
 
 class CategorySpecBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @autoIncrement   true
+     * @comment         逐渐
+     */
     protected $category_spec_id;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         栏目ID
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         规格ID
+     */
     protected $spec_id;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

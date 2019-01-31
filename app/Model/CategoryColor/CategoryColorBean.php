@@ -7,13 +7,56 @@
  */
 namespace App\Model\CategoryColor;
 
-use App\Model\Spec\SpecBean;
+use EasySwoole\Spl\SplBean;
 
-class CategoryColorBean extends SpecBean
+class CategoryColorBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @autoIncrement   true
+     * @comment         逐渐
+     */
     protected $category_color_id;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         栏目ID
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @type            int
+     * @typeLength      11
+     * @notNull         true
+     * @comment         颜色ID
+     */
     protected $color_id;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         创建时间
+     */
+    protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @notNull         true
+     * @comment         修改时间
+     */
+    protected $updated;
 
     /**
      * @return mixed
@@ -94,6 +137,4 @@ class CategoryColorBean extends SpecBean
     {
         $this->updated = $updated;
     }
-    protected $created;
-    protected $updated;
 }

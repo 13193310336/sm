@@ -30,6 +30,6 @@ class AttributeSetModel extends Model
     protected function bean()
     {
         // TODO: Implement bean() method.
-        $this->bean = Attributebean::class;
+        $this->bean = AttributeSetBean::class;
     }
 }

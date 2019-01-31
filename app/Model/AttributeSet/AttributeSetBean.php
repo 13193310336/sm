@@ -9,12 +9,54 @@ namespace App\Model\AttributeSet;
 
 use EasySwoole\Spl\SplBean;
 
-class Attributebean extends SplBean
+class AttributeSetBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @autoIncrement   true
+     * @comment         属性集合id
+     */
     protected $set_id;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @comment         属性集C名称
+     */
     protected $set_name;
+
+    /**
+     * @var
+     * @type            varchar
+     * @typeLength      50
+     * @notNull         true
+     * @index           true
+     * @indexType       unique
+     * @indexMethod     btree
+     * @comment         属性code
+     */
     protected $set_code;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

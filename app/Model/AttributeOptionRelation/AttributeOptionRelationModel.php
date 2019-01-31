@@ -17,7 +17,7 @@ class AttributeOptionRelationModel extends Model
     protected function table()
     {
         // TODO: Implement table() method.
-        $this->table = 'attribute_option';
+        $this->table = 'attribute_option_relation';
     }
 
     protected function primaryKey()
@@ -29,6 +29,6 @@ class AttributeOptionRelationModel extends Model
     protected function bean()
     {
         // TODO: Implement bean() method.
-        $this->bean = AttributeOptionRelationModel::class;
+        $this->bean = AttributeOptionRelationBean::class;
     }
 }
