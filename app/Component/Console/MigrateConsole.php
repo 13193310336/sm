@@ -160,6 +160,11 @@ class MigrateConsole implements CommandInterface
             config('database.mysql.database'),
             config('database.mysql.port')
         );
+
+        if (!$mysql->get_connection_stats()) {
+            return '数据库链接失败！';
+        }
+
         if ($this->isCover) {
             $mysql->query('DROP TABLE `' . $tableName . '`');
         }
