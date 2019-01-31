@@ -12,10 +12,52 @@ use EasySwoole\Spl\SplBean;
 
 class AttributeOptionBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @autoIncrement   true
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         属性选项ID
+     */
     protected $option_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      100
+     * @comment         选项名称
+     */
     protected $option_name;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      100
+     * @index           true
+     * @indexType       unique
+     * @indexMethod     btree
+     * @comment         选项code
+     */
     protected $option_code;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            datetime
+     * @typeLength      0
+     */
     protected $created;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            datetime
+     * @typeLength      0
+     */
     protected $updated;
 
     /**

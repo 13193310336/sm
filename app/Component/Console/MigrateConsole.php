@@ -9,9 +9,16 @@ namespace App\Component\Console;
 
 use function App\Component\config;
 use App\Component\GlobalConst;
+use App\Component\Pool\MysqlObject;
+use App\Component\Pool\MysqlPool;
+use App\Model\Attribute\AttributeModel;
 use App\Model\Model;
+use Co\Channel;
+use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
+use EasySwoole\FastCache\Cache;
+use EasySwoole\Mysqli\Config;
 
 class MigrateConsole implements CommandInterface
 {
@@ -19,6 +26,8 @@ class MigrateConsole implements CommandInterface
     protected $modelDirectory = EASYSWOOLE_ROOT . '/app/Model';
 
     protected $fieldSqlMap = [];
+
+    protected $isCover = false;
 
     public function commandName(): string
     {
@@ -35,6 +44,9 @@ class MigrateConsole implements CommandInterface
         if (strtolower($tableName) != GlobalConst::COMMAND_ALL && !isset($tableNameMap[$tableName])) {
             return Utility::easySwooleLog() . "\e[36m 数据表\e[0m $tableName \e[36m不存在,请确认该参数已在模型table()方法中返回\e[0m";
         }
+        if (strtolower($args[1]) == 'true') {
+            $this->isCover = true;
+        }
         $returnMessage = Utility::easySwooleLog();
         if (isset($tableNameMap[$tableName])) {
             $returnMessage .= $this->analysisProperty($tableNameMap[$tableName]);
@@ -43,7 +55,7 @@ class MigrateConsole implements CommandInterface
                 $returnMessage .= $this->analysisProperty($tableModel);
             }
         }
-        return '';
+        return $returnMessage;
     }
 
     /**
@@ -138,7 +150,33 @@ class MigrateConsole implements CommandInterface
 
         return $string;
     }
-    
+
+    /**
+     * 执行Sql
+     * @param $tableName
+     * @param $sql
+     * @return string
+     */
+    public function execSql($tableName, $sql)
+    {
+        $returnMessage = "\e[36m 数据表\e[0m " . $tableName . " \e[36m迁移成功\e[0m";
+        $mysql = new \mysqli(
+            config('database.mysql.host'),
+            config('database.mysql.user'),
+            config('database.mysql.password'),
+            config('database.mysql.database'),
+            config('database.mysql.port')
+        );
+        if ($this->isCover) {
+            $mysql->query('DROP TABLE `' . $tableName . '`');
+        }
+        $sqlExec = $mysql->query($sql);
+        if (!$sqlExec) {
+            $returnMessage = "\e[36m 数据表\e[0m " . $tableName . " \e[36m迁移失败,失败原因\e[0m" . "\e[0m " . $mysql->error . "\e[36m";
+        }
+        return $returnMessage;
+    }
+
 
     /**
      * 分析数据属性
@@ -155,7 +193,8 @@ class MigrateConsole implements CommandInterface
             $this->fieldSqlMap[$tableName][$property->name]
                 = $this->analysisPropertiesDocument($reflectionProperty->getDocComment());
         }
-        return $this->makeCreateSql($tableName);
+
+        return $this->execSql($tableName, $this->makeCreateSql($tableName));
     }
 
     /**
@@ -272,12 +311,14 @@ class MigrateConsole implements CommandInterface
         $allValue = GlobalConst::COMMAND_ALL;
         return $logo . <<<HELP_START
 \e[33mOperation:\e[0m
-\e[31m  php easyswoole migrate [arg] \e[0m
+\e[31m  php easyswoole migrate [arg1] [arg2]\e[0m
 \e[33mIntro:\e[0m
-\e[36m  通过模型生成数据表, arg值为 \e[0m 模型中table属性值 \e[36m或\e[0m {$allValue} 
+\e[36m  通过模型生成数据表, arg1值为 \e[0m 模型中table属性值 \e[36m或\e[0m {$allValue},\e[36m arg2值为\e[0m bool\e[36m型,默认\e[0m false
 \e[33mArg:\e[0m
-\e[32m  当arg值为table属性值时 \e[0m         创建/重建该数据表
-\e[32m  当arg值为{$allValue}时 \e[0m                 创建/重建全部数据表
+\e[36m  当\e[0m arg1 \e[36m值为\e[0mtable属性值         \e[36m 创建/重建该数据表 \e[0m
+\e[36m  当\e[0m arg1 \e[36m值为\e[0m{$allValue}                 \e[36m 创建/重建全部数据表 \e[0m
+\e[36m  当\e[0m arg2 \e[36m值为\e[0mtrue                \e[36m 如果数据表已经存在,会直接覆盖 \e[0m
+\e[36m  当\e[0m arg2 \e[36m值为\e[0mfalse               \e[36m 如果数据表已经存在,会跳过并报告失败原因 \e[0m
 HELP_START;
     }
 }

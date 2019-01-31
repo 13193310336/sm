@@ -75,6 +75,7 @@ class AttributeBean extends SplBean
      * @comment         修改时间
      */
     protected $updated;
+
     /**
      * @return mixed
      */
