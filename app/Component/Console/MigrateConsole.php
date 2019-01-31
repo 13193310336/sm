@@ -9,16 +9,9 @@ namespace App\Component\Console;
 
 use function App\Component\config;
 use App\Component\GlobalConst;
-use App\Component\Pool\MysqlObject;
-use App\Component\Pool\MysqlPool;
-use App\Model\Attribute\AttributeModel;
 use App\Model\Model;
-use Co\Channel;
-use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Command\CommandInterface;
 use EasySwoole\EasySwoole\Command\Utility;
-use EasySwoole\FastCache\Cache;
-use EasySwoole\Mysqli\Config;
 
 class MigrateConsole implements CommandInterface
 {
