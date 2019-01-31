@@ -42,10 +42,10 @@ class MigrateConsole implements CommandInterface
         }
         $returnMessage = Utility::easySwooleLog();
         if (isset($tableNameMap[$tableName])) {
-            $returnMessage .= $this->analysisProperty($tableNameMap[$tableName]);
+            $returnMessage .= $this->analysisProperty($tableNameMap[$tableName]) . PHP_EOL;
         } else {
             foreach ($tableNameMap as $tableModel) {
-                $returnMessage .= $this->analysisProperty($tableModel);
+                $returnMessage .= $this->analysisProperty($tableModel) . PHP_EOL;
             }
         }
         return $returnMessage;
@@ -211,8 +211,15 @@ class MigrateConsole implements CommandInterface
         ];
         foreach ($analysisKey as $key => $item) {
             preg_match('/@' . $key . '\s+(.*)\n/', $string, $matchArray);
-            if (isset($matchArray[1]))
-                $analysisKey[$key] = $matchArray[1];
+            if (isset($matchArray[1])) {
+                $value = strtolower($matchArray[1]);
+                if ($value == 'true') {
+                    $value = true;
+                }else if ($value == 'false') {
+                    $value = false;
+                }
+                $analysisKey[$key] = $value;
+            }
         }
         return $analysisKey;
     }
