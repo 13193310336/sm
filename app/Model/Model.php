@@ -50,6 +50,24 @@ abstract class Model
     protected $bean = null;
 
     /**
+     * 自动更新时间戳
+     * @var bool
+     */
+    protected $timestamp = true;
+
+    /**
+     * 默认创建时间字段
+     * @var string
+     */
+    protected $defaultCreateTimeColumn = 'created';
+
+    /**
+     * 默认修改时间字段
+     * @var string
+     */
+    protected $defaultUpdateTimeColumn = 'updated';
+
+    /**
      * Model constructor.
      * @param MysqlObject|null $object  链接
      * @param bool $autoGetConnect      链接不存在是否自动获取链接
@@ -118,6 +136,21 @@ abstract class Model
         PoolManager::getInstance()->getPool(MysqlPool::class)->recycleObj($this->object);
     }
 
+    public function getBean(): string
+    {
+        return $this->bean;
+    }
+
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
+    public function getPrimary(): String
+    {
+        return $this->primaryKey;
+    }
+
     /**
      * 通用分页
      * @param MysqlObject $query
@@ -176,10 +209,12 @@ abstract class Model
      */
     public function find($primary = false)
     {
-        if ($primary)
+        if ($primary) {
             return $this->getConnect()->where($this->getPrimary(), $primary)->getOne($this->getTable());
-        else if ($primary === false)
+        } else if ($primary === false) {
             return $this->getConnect()->getOne($this->getTable());
+        }
+        return null;
     }
 
     /**
@@ -190,8 +225,12 @@ abstract class Model
     public function insert(array $data)
     {
         $bean = $this->getDataBean($data);
-        $bean->setCreated(Carbon::now());
-        $bean->setUpdated(Carbon::now());
+        if ($this->timestamp) {
+            $createTimeMethod = 'set' . ucfirst($this->defaultCreateTimeColumn);
+            $updateTimeMethod = 'set' . ucfirst($this->defaultUpdateTimeColumn);
+            $bean->$createTimeMethod(Carbon::now());
+            $bean->$updateTimeMethod(Carbon::now());
+        }
         $insertResult = $this->getConnect()->insert($this->getTable(), $bean->toArray(null, SplBean::FILTER_NOT_NULL));
         return $insertResult;
     }
@@ -205,26 +244,14 @@ abstract class Model
     public function update($primary, array $data)
     {
         $bean = $this->getDataBean($data);
-        $bean->setUpdated(Carbon::now());
+        if ($this->timestamp) {
+            $updateTimeMethod = 'set' . ucfirst($this->defaultUpdateTimeColumn);
+            $bean->$updateTimeMethod(Carbon::now());
+        }
         return $this
             ->getConnect()
             ->where($this->getPrimary(), $primary)
             ->update($this->getTable(), $bean->toArray(null, SplBean::FILTER_NOT_NULL));
-    }
-
-    public function getBean(): string
-    {
-        return $this->bean;
-    }
-
-    public function getTable(): string
-    {
-        return $this->table;
-    }
-
-    public function getPrimary(): String
-    {
-        return $this->primaryKey;
     }
 
     public function __destruct()
