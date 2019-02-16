@@ -11,6 +11,9 @@ use EasySwoole\Spl\SplBean;
 
 class SkuImagesBean extends SplBean
 {
+    /**
+     * @var
+     */
     protected $sku_img_id;
     protected $sku_id;
     protected $img_id;

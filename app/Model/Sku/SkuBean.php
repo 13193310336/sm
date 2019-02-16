@@ -12,29 +12,234 @@ use EasySwoole\Spl\SplBean;
 
 class SkuBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $sku_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         SPUid
+     */
     protected $spu_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         spu
+     *
+     */
     protected $spu;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         sku
+     */
     protected $sku;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      100
+     * @comment         sku标题
+     */
     protected $sku_title;
-    protected $sku_main_images;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      500
+     * @comment         主图链接
+     */
+    protected $sku_main_image;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         sku长度
+     */
     protected $sku_length;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         sku宽度
+     */
     protected $sku_width;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         sku高度
+     */
     protected $sku_height;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            float
+     * @typeLength      10
+     * @typeFloat       2
+     * @comment         重量
+     */
     protected $sku_weight;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      2
+     * @comment         sku状态
+     */
     protected $sku_status;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         商品条码
+     */
     protected $barcode;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         栏目ID
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         颜色ID
+     */
     protected $color_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         颜色名称
+     */
     protected $color_name;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         规格ID
+     */
     protected $spec_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         规格名称
+     */
     protected $spec_name;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         当前售价
+     */
     protected $price;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         上一次售价
+     */
     protected $last_price;
+
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      2
+     * @comment         库存模式
+     */
     protected $stock_model;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         库存数量
+     */
     protected $stock_num;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         商户ID
+     */
     protected $shop_id;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**
