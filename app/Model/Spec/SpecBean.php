@@ -11,9 +11,40 @@ use EasySwoole\Spl\SplBean;
 
 class SpecBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $spec_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         规格名称
+     */
     protected $spec_name;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
     /**
      * @return mixed

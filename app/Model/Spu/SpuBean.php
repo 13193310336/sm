@@ -13,20 +13,151 @@ use EasySwoole\Spl\SplBean;
 
 class SpuBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $spu_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      100
+     * @comment         spu
+     */
     protected $spu;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         spu标题
+     */
     protected $spu_title;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      250
+     * @comment         主图
+     */
     protected $spu_main_image;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      500
+     * @comment         spu介绍
+     */
     protected $spu_description;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         spu最小价格
+     */
     protected $spu_min_price;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         spu最大价格
+     */
     protected $spu_max_price;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         spu平均价格
+     */
     protected $spu_avg_price;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         spu状态
+     */
     protected $spu_status;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      250
+     * @comment         spu备注
+     */
     protected $spu_remark;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         栏目Id
+     */
     protected $category_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         sku数量
+     */
     protected $sku_num;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         商户id
+     */
     protected $shop_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         是否sku主图
+     */
+    protected $main;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

@@ -11,13 +11,76 @@ use EasySwoole\Spl\SplBean;
 
 class UserBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         账户
+     */
     protected $account;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         名称
+     */
     protected $name;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            varchar
+     * @typeLength      50
+     * @comment         密码
+     */
     protected $password;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         用户类型
+     */
     protected $type;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         角色
+     */
     protected $role;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

@@ -13,12 +13,62 @@ class SkuImagesBean extends SplBean
 {
     /**
      * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
      */
     protected $sku_img_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         skuID
+     */
     protected $sku_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         图片ID
+     */
     protected $img_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         是否sku主图
+     */
     protected $main;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

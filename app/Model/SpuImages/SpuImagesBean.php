@@ -11,11 +11,58 @@ use EasySwoole\Spl\SplBean;
 
 class SpuImagesBean extends SplBean
 {
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $spu_img_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         图片Id
+     */
     protected $img_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         spuId
+     */
     protected $spu_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      11
+     * @comment         是否主图
+     */
     protected $main;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**

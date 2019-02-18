@@ -12,22 +12,90 @@ use EasySwoole\Spl\SplBean;
 class SkuPriceBean extends SplBean
 {
 
+    /**
+     * @var
+     * @primary         true
+     * @notNull         true
+     * @autoIncrement   true
+     * @type            int
+     * @typeLength      11
+     * @comment         主键
+     */
     protected $price_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @index           true
+     * @indexType       normal
+     * @indexMethod     btree
+     * @comment         图片ID
+     */
     protected $sku_id;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         当前价格
+     */
     protected $price;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       4
+     * @comment         上一次价格
+     */
     protected $last_price;
     /**
-     * 与上次价格相差绝对值
      * @var
+     * @notNull         true
+     * @type            int
+     * @typeLength      11
+     * @comment         与上次价格相差绝对值
      */
     protected $last_absolute_price;
-    protected $up_or_down;
+
     /**
-     * 与上次价格比较百分比
      * @var
+     * @notNull         true
+     * @type            tinyint
+     * @typeLength      1
+     * @comment         与上次价格比较上升还是下降
+     */
+    protected $up_or_down;
+
+    /**
+     * @var
+     * @notNull         true
+     * @type            decimal
+     * @typeLength      10
+     * @typeFloat       2
+     * @comment         与上次价格比较百分比
      */
     protected $change_percentage;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         创建时间
+     */
     protected $created;
+
+    /**
+     * @var
+     * @type            datetime
+     * @typeLength      0
+     * @comment         修改时间
+     */
     protected $updated;
 
     /**
