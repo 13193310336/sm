@@ -9,14 +9,9 @@
 namespace EasySwoole\EasySwoole;
 
 
-use function App\Component\config;
 use App\Component\EasySwooleEventHelper;
 use App\Component\GlobalConst;
-use App\Component\Pool\MysqlPool;
-use duncan3dc\Laravel\BladeInstance;
 use EasySwoole\Component\Context\ContextManager;
-use EasySwoole\Component\Di;
-use EasySwoole\Component\Pool\PoolManager;
 use EasySwoole\EasySwoole\Swoole\EventRegister;
 use EasySwoole\EasySwoole\AbstractInterface\Event;
 use EasySwoole\Http\Request;
@@ -27,31 +22,21 @@ class EasySwooleEvent implements Event
 
     public static function initialize()
     {
-        // 设置时区
-        date_default_timezone_set('Asia/Shanghai');
-
-        //加载自定义命令
-        EasySwooleEventHelper::loadConsole();
+        //覆盖默认设置
+        EasySwooleEventHelper::overwriteDefaultSetting();
 
         //加载自定义配置
         EasySwooleEventHelper::loadConf();
 
-        //设置控制器路径
-        Di::getInstance()->set(
-            SysConst::HTTP_CONTROLLER_NAMESPACE,
-            config('app.controllerNamespace')
-        );
+        //注册缓存驱动
+        EasySwooleEventHelper::registerCache();
 
-        //注册mysql连接池
-        PoolManager::getInstance()->register(MysqlPool::class, config('database.mysql.POOL_MAX_NUM'));
+        //加载自定义命令
+        EasySwooleEventHelper::loadConsole();
 
-        //注册blade引擎
-        Di::getInstance()->set(
-            GlobalConst::DI_BLADE, new BladeInstance(
-                config('template.path'),
-                config('template.cachePath')
-            )
-        );
+        //注册连接池
+        EasySwooleEventHelper::registerPool();
+
     }
 
     public static function mainServerCreate(EventRegister $register)

@@ -30,4 +30,7 @@ class GlobalConst
 
     //自定义命令中参数ALL的值
     const COMMAND_ALL = 'all';
+
+    //用户权限缓存KEY
+    const KEY_USER_ACCESS = 'KEY_USER_ACCESS';
 }

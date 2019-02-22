@@ -9,9 +9,12 @@
 namespace App\Model\Role;
 
 
+use function App\Component\getAdminCacheKey;
+use App\Component\GlobalConst;
 use App\Model\Model;
 use App\Model\Node\NodeModel;
 use App\Model\RoleNode\RoleNodeModel;
+use easySwoole\Cache\Cache;
 
 class RoleModel extends Model
 {
@@ -67,7 +70,7 @@ class RoleModel extends Model
      * @param $node
      * @return bool
      */
-    public function updateRole($id, $name, $node)
+    public function updateRole(int $id, string $name, string $node): bool
     {
         $roleNodeModel = new RoleNodeModel();
         $role = $this->find($id);
@@ -82,4 +85,17 @@ class RoleModel extends Model
         }
         return false;
     }
+
+    /**
+     * 生成缓存
+     * @param int $roleId
+     */
+    public function generateRoleAccess(int $roleId)
+    {
+        $roleNodeModel = new RoleNodeModel();
+        $roleNode = $roleNodeModel->getRelation($roleId);
+        Cache::set(getAdminCacheKey(GlobalConst::KEY_USER_ACCESS), $roleNode);
+        $roleNodeModel->recoveryConnect();
+    }
+
 }

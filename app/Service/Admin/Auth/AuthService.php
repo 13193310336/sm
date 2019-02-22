@@ -7,7 +7,10 @@
  */
 namespace App\Service\Admin\Auth;
 
+use function App\Component\getAdminCacheKey;
+use App\Component\GlobalConst;
 use App\Service\Admin\AdminService;
+use easySwoole\Cache\Cache;
 
 class AuthService extends AdminService
 {
@@ -47,6 +50,10 @@ class AuthService extends AdminService
     public function checkAccess($uri): bool
     {
         $return = true;
+        $access = Cache::get(getAdminCacheKey(GlobalConst::KEY_USER_ACCESS));
+        if ($access) {
+
+        }
 
         return $return;
     }
@@ -69,6 +76,5 @@ class AuthService extends AdminService
     {
         return in_array($this->path, $this->exceptPath);
     }
-
 
 }

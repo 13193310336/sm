@@ -12,6 +12,8 @@ namespace App\Model\User;
 use App\Component\GlobalConst;
 use App\Model\Model;
 use EasySwoole\Component\Context\ContextManager;
+use EasySwoole\Http\Session\SessionDriver;
+use EasySwoole\Http\Session\SessionHandler;
 use EasySwoole\Utility\Hash;
 
 class UserModel extends Model
@@ -126,12 +128,16 @@ class UserModel extends Model
      */
     public function checkUser($account, $password)
     {
+        /**
+         * @var $sessionServer SessionDriver
+         */
         $sessionServer = ContextManager::getInstance()->get(GlobalConst::CONTEXT_SESSION);
         $user = $this->getUser($account);
         if ($user && Hash::validatePasswordHash($password, $user['password'])) {
             if ($sessionServer) {
                 unset($user['password']);
                 $sessionServer->set(self::SESSION_KEY, $user);
+                $sessionServer->writeClose();
             }
             return true;
         } else
